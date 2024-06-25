@@ -1,17 +1,30 @@
 import React from 'react';
 import { RouterProvider, Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom"
+import Home from './components/Home';
+import Login from './components/Pages/Login';
+import Play from './components/Pages/Play';
+import Lobby from './components/Pages/Lobby';
+import Context from './components/ContextApi/Context';
 
 function App() {
   const router = createBrowserRouter(createRoutesFromElements(
-    <Route path='/' element={<Layout />} >
-      <Route index element={<Home />} />
+    <Route path='/'  >
+      <Route index element={<Home />}/>
+      <Route path='login' element={<Login />}/>
+      <Route path='play' >
+        <Route index element={<Play></Play>}></Route>
+      <Route path='lobby' element={<Lobby />}/>
+      </Route>
+    
+      
       <Route path="*" element={<Error />} />
     </Route>
+    
   ))
 
   return (
     <>
-    <RouterProvider element={router}/>
+  <Context>  <RouterProvider router={router}/></Context>
     </>
   )
 }
