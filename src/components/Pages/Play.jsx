@@ -27,6 +27,7 @@ export default function Play() {
 
 
         <Link onClick={handleLobbyCreate} to='lobby' className='text'>Create Room</Link><br/>
+        <Link to='join' className='text'>Join Room</Link><br/>
         <Link to='../' className='text'>Back</Link><br/>
 
 

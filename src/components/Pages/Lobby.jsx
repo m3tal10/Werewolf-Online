@@ -1,30 +1,43 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { AuthContext } from '../ContextApi/Context'
 
 export default function Lobby() {
+
+
+  const {userName,roomName,action,setAction}=useContext(AuthContext)
+
+  const [playerData,setPlayerData]=useState([])
+  const [temp, setTemp] = useState(0)
+  useEffect(()=>{
+    setInterval(()=>{
+      setTemp((prevTemp)=>prevTemp+1)
+    }, 2000)
+  }, [])
+  
+  useEffect(()=>{
+
+    fetch(`http://localhost:5000/lobby/${roomName?roomName:userName}`)
+    .then(res=>res.json())
+    .then(data=>setPlayerData(data))
+    console.log(playerData)
+    setAction(null)
+  }, [temp])
+
+
+  
+
+  
+
   return (
 <>
 
 
 <div className="text-center text-5vh">
-    <p>Lobby 1</p>
+    <p>Lobby: {playerData[0]?.playerName}</p>
 </div>
 <div className='w-screen h-[55vh] grid grid-cols-4 '>
-        <div className="border-2 border-black flex justify-center items-center">1</div>
-        <div className="border-2 border-black flex justify-center items-center">2</div>
-        <div className="border-2 border-black flex justify-center items-center">3</div>
-        <div className="border-2 border-black flex justify-center items-center">4</div>
-        <div className="border-2 border-black flex justify-center items-center">5</div>
-        <div className="border-2 border-black flex justify-center items-center">6</div>
-        <div className="border-2 border-black flex justify-center items-center">7</div>
-        <div className="border-2 border-black flex justify-center items-center">8</div>
-        <div className="border-2 border-black flex justify-center items-center">9</div>
-        <div className="border-2 border-black flex justify-center items-center">10</div>
-        <div className="border-2 border-black flex justify-center items-center">11</div>
-        <div className="border-2 border-black flex justify-center items-center">12</div>
-        <div className="border-2 border-black flex justify-center items-center">13</div>
-        <div className="border-2 border-black flex justify-center items-center">14</div>
-        <div className="border-2 border-black flex justify-center items-center">15</div>
-        <div className="border-2 border-black flex justify-center items-center">16</div>
+{playerData.map(player=><div className="border-2 border-black flex justify-center items-center">{player?.playerName}</div>)}
+     
 
     </div>
 

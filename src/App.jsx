@@ -5,6 +5,7 @@ import Login from './components/Pages/Login';
 import Play from './components/Pages/Play';
 import Lobby from './components/Pages/Lobby';
 import Context from './components/ContextApi/Context';
+import Join from './components/Pages/Join';
 
 function App() {
   const router = createBrowserRouter(createRoutesFromElements(
@@ -14,6 +15,7 @@ function App() {
       <Route path='play' >
         <Route index element={<Play></Play>}></Route>
       <Route path='lobby' element={<Lobby />}/>
+      <Route path='join' element={<Join />}/>
       </Route>
     
       

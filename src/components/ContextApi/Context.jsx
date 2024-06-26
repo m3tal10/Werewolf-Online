@@ -5,14 +5,28 @@ export const AuthContext=createContext(null)
 
 export default function Context({children}) {
 
-  const [userName,setUserName]=useState('abir')  
+  const [userName,setUserName]=useState('')  
+  const [roomName,setRoomName]=useState(null)
+  const [action,setAction]=useState(null)
+  useEffect(()=>{
+
+    fetch(`http://localhost:5000/players/${userName}`)
+    .then (res=>res.json())
+    .then(data=>console.log(data))
+
+
+
+  },[userName])
     
   const authInfo={
-    userName,setUserName
+    userName,setUserName,
+    setRoomName,roomName,
+    action,setAction
 
   }  
 
  
+
 
 
   return (
