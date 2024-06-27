@@ -8,6 +8,8 @@ export default function Login() {
 
     const {setUserName,userName}=useContext(AuthContext)
 
+    //basic login handler
+
     const handleRegPlayer=(event)=>{
 
 
@@ -32,6 +34,7 @@ export default function Login() {
         })
             
         setUserName(playerName)
+        localStorage.setItem("userInfo",JSON.stringify(playerData))
         navigate("/")
 
 

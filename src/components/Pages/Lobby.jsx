@@ -20,11 +20,14 @@ export default function Lobby() {
     .then(res=>res.json())
     .then(data=>setPlayerData(data))
     setAction(null)
+    //to scroll with message
+    var element = document.getElementById(`end`);
+    element.scrollIntoView()
   }, [temp])
 
 
-  const handleChat=()=>{
-
+  const handleChat=(event)=>{
+    event.preventDefault()
     const message=document.getElementById('chat').value
     const user=userName
 
@@ -42,8 +45,12 @@ export default function Lobby() {
 
   })
 
+  document.getElementById('chat').value=''
 
+  console.log(element)
   }
+
+
 
   
 
@@ -60,12 +67,18 @@ export default function Lobby() {
 
     </div>
 
-    <div className="h-[32vh] w-[100wh] border-2 border-red-500 overflow-y-scroll">
-    {playerData[0]?.Chats?.map(chat=><p className='text-[3vh]'><span className='text-bold text-red-400 '>{chat.body.user}:</span> {chat.body.message}</p>)}
+    <div id='messageBox' className="h-[32vh] w-[100wh] border-2 border-red-500 overflow-y-scroll">
+    {playerData[0]?.Chats?.map(chat=><p id={`message`} className='text-[3vh]'><span className='text-bold text-red-400 '>{chat.body.user}:</span> {chat.body.message}</p>)}
+    
+    <div id='end' className='h-[5vh]'>
+
+    </div>
     </div>
     <div className="flex">
-    <input id='chat' className='w-[100vw] h-[8vh]' type="text" />
-    <button onClick={handleChat}>send</button>
+   <form onSubmit={handleChat}>
+   <input id='chat' className='w-[100vw] h-[8vh]' type="text" />
+   <button>send</button>
+   </form>
     </div>
 
 </>

@@ -7,6 +7,7 @@ export default function () {
 
         const {userName,setRoomName,setAction}=useContext(AuthContext)
         const navigate= useNavigate()
+        //handling the joining lobby form
         const handleLobbyForm=(event)=>{
             navigate("../lobby")
             event.preventDefault()
@@ -14,7 +15,7 @@ export default function () {
             const form=event.target
             const lobbyNum=form.lobbyNum.value
 
-
+            //accessing the join lobby api to send the player data back to the lobby collection
             
             fetch(`http://localhost:5000/lobbyJoin/${userName}`,{
                 method:'PUT',
@@ -27,6 +28,7 @@ export default function () {
             })
 
             setRoomName(lobbyNum)
+            localStorage.setItem('roomName',lobbyNum)
             console.log(lobbyNum)
          
         }
