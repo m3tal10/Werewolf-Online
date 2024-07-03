@@ -4,11 +4,11 @@ import { AuthContext } from '../ContextApi/Context'
 
 export default function Play() {
 
-    const {userName}=useContext(AuthContext)
+    const {userName,setUserName,setRoomName}=useContext(AuthContext)
     const handleLobbyCreate=()=>{
 
         const lobbyName={userName}
-        fetch(`http://localhost:5000/lobby/${userName}`,{
+        fetch(`https://project-warewolf-aliashrafabirs-projects.vercel.app/lobby/${userName}`,{
             method:'POST',
             headers:{'content-type':'application/json'},
             body: JSON.stringify(lobbyName),
@@ -19,6 +19,20 @@ export default function Play() {
 
    
         })
+        console.log('hit')
+        localStorage.removeItem('roomName')
+
+    }
+
+    const handleLogout=()=>{
+
+
+      setUserName(null)
+      setRoomName(null)
+      localStorage.removeItem('userInfo')
+      localStorage.removeItem('roomName')
+      
+
 
     }
 
@@ -28,11 +42,11 @@ export default function Play() {
             <p>
               {userName?userName:''}
             </p>
-            <button className='px-4 py-2 bg-red-500 text-bold text-[2vh] rounded-lg'>Logout</button>
+          {userName?  <button onClick={handleLogout} className='px-4 py-2 bg-red-500 text-bold text-[2vh] rounded-lg'>Logout</button>:''}
         </div>
         <div className="w-[95vw] h-[80vh] flex flex-col justify-center items-center">
 
-
+<Link  to='../login' className='text'>Login</Link><br/>
 <Link onClick={handleLobbyCreate} to='lobby' className='text'>Create Room</Link><br/>
 <Link to='join' className='text'>Join Room</Link><br/>
 <Link to='../' className='text'>Back</Link><br/>

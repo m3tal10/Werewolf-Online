@@ -17,7 +17,7 @@ export default function () {
 
             //accessing the join lobby api to send the player data back to the lobby collection
             
-            fetch(`http://localhost:5000/lobbyJoin/${userName}`,{
+            fetch(`https://project-warewolf-aliashrafabirs-projects.vercel.app/lobbyJoin/${userName}`,{
                 method:'PUT',
                 headers:{'content-type':'application/json'},
                 body: JSON.stringify({lobbyNum}),
@@ -40,7 +40,7 @@ export default function () {
     <div>
 
         <form onSubmit={handleLobbyForm} className='flex-col justify-center items-center'>
-            <input type='text' name='lobbyNum'></input>
+            <input className='bg-red-500' type='text' name='lobbyNum' placeholder='lobby name'></input>
             <button >Join</button>
 
         </form>

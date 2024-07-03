@@ -21,7 +21,7 @@ export default function Login() {
 
         const playerData={playerName,avatar}
 
-        fetch('http://localhost:5000/players',{
+        fetch('https://project-warewolf-aliashrafabirs-projects.vercel.app/players',{
             method:'POST',
             headers:{'content-type':'application/json'},
             body: JSON.stringify(playerData),
@@ -35,7 +35,7 @@ export default function Login() {
             
         setUserName(playerName)
         localStorage.setItem("userInfo",JSON.stringify(playerData))
-        navigate("/")
+        navigate("/play")
 
 
     }
